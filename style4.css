@@ -1,0 +1,179 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    text-align: center;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #800000;
+    color: white;
+    position: relative;
+}
+
+/* ☰ (Hamburger Menu) Left Side */
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    display: none;
+}
+
+/* Logo Styling */
+.logo-container img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Navigation Styling */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ffcc00;
+}
+
+/* Form Styling */
+.verification-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.verification-form h2 {
+    margin-bottom: 15px;
+}
+
+.verification-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ffcc00;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #ffbb00;
+}
+
+/* Footer Section */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 20px 5%;
+    margin-top: auto;
+    position: relative;
+}
+
+.footer-text {
+    font-size: 16px;
+}
+
+/* Right Side Image */
+.footer-image {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        display: none;
+        background-color: #800000;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        padding: 10px 0;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .nav-links.show-menu {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .verification-form {
+        width: 90%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-image {
+        margin-top: 10px;
+    }
+}

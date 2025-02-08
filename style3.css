@@ -1,0 +1,161 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    text-align: center;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #800000;
+    color: white;
+    position: relative;
+}
+
+/* Logo Styling */
+.logo-container img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Navigation Styling */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ffcc00;
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    left: 20px; /* Left Side में Shift */
+    top: 15px;
+}
+
+/* Buttons Section */
+.buttons {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.main-btn {
+    background-color: #ffcc00;
+    color: black;
+    padding: 15px 30px;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 40%;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.main-btn:hover {
+    background-color: #ff9900;
+}
+
+/* Footer Section */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 20px 5%;
+    margin-top: auto;
+    position: relative;
+}
+
+.footer-text {
+    font-size: 16px;
+}
+
+/* Right Side Image */
+.footer-image {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        display: none;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .buttons {
+        width: 100%;
+    }
+
+    .main-btn {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-image {
+        margin-top: 10px;
+    }
+}
